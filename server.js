@@ -37,7 +37,7 @@ const hofGolfers = {
         'professionalWins': 95
     },
     'unknown': {
-        'nickname': 'uknown',
+        'nickname': 'unknown',
         'turnedPro': 'unknown',
         'numberOfMajors': 'unknown',
         'professionalWins': 'unknown'
@@ -53,7 +53,6 @@ const hofGolfers = {
         if (hofGolfers[golferName]) {
             res.json(hofGolfers[golferName] )
         } else if (hofGolfers) {
-            console.log(hofGolfers)
             res.json(hofGolfers)
         } else {
             res.json(hofGolfers['unknown'])
