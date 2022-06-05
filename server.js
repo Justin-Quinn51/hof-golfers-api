@@ -52,6 +52,9 @@ const hofGolfers = {
         const golferName = req.params.name.toLowerCase()
         if (hofGolfers[golferName]) {
             res.json(hofGolfers[golferName] )
+        } else if (hofGolfers) {
+            console.log(hofGolfers)
+            res.json(hofGolfers)
         } else {
             res.json(hofGolfers['unknown'])
         }
