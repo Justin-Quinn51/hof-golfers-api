@@ -2,6 +2,25 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = 8000;
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
+
+app.use(cors());
+
+app.use(expressCspHeader({
+    directives: {
+        'default-src': [SELF],
+        'report-to': 'my-report-group'
+    },
+    reportUri: 'https://cspreport.com/send',
+    reportTo: [
+        {
+            group: 'my-report-group',
+            max_age: 30 * 60,
+            endpoints: [{ url: 'https://cspreport.com/send'}],
+            include_subdomains: true
+        }
+    ]
+}));
 
 const hofGolfers = {
     'Tiger Woods': {
