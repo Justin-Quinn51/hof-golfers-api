@@ -2,62 +2,45 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = 8000;
-const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 
 app.use(cors());
 
-app.use(expressCspHeader({
-    directives: {
-        'default-src': [SELF],
-        'report-to': 'my-report-group'
-    },
-    reportUri: 'https://cspreport.com/send',
-    reportTo: [
-        {
-            group: 'my-report-group',
-            max_age: 30 * 60,
-            endpoints: [{ url: 'https://cspreport.com/send'}],
-            include_subdomains: true
-        }
-    ]
-}));
-
 const hofGolfers = {
-    'Tiger Woods': {
+    'tiger woods': {
         'nickname': 'Tiger',
         'turnedPro': 1996,
         'numberOfMajors': 15,
         'professionalWins': 110
     },
-    'Jack Nicklaus': {
+    'jack nicklaus': {
         'nickname': 'The Golden Bear',
         'turnedPro': 1961,
         'numberOfMajors': 18,
         'professionalWins': 117
     },
-    'Ben Hogan': {
+    'ben hogan': {
         'nickname': 'The Hawk',
         'turnedPro': 1930,
         'numberOfMajors': 9,
         'professionalWins': 71
     },
-    'Gary Player': {
+    'gary player': {
         'nickname': 'The Black Knight',
         'turnedPro': 1953,
         'numberOfMajors': 9,
         'professionalWins': 160
     },
-    'Arnold Palmer': {
+    'arnold palmer': {
         'nickname': 'The King',
         'turnedPro': 1954,
         'numberOfMajors': 10,
         'professionalWins': 95
     },
-    'Unknown': {
-        'nickname': 'Uknown',
-        'turnedPro': 'Unknown',
-        'numberOfMajors': 'Unknown',
-        'professionalWins': 'Unknown'
+    'unknown': {
+        'nickname': 'uknown',
+        'turnedPro': 'unknown',
+        'numberOfMajors': 'unknown',
+        'professionalWins': 'unknown'
     }
  }
 
@@ -66,11 +49,11 @@ const hofGolfers = {
     })
 
     app.get('/api/:name', (req,res) => {
-        const golferName = req.params.name.toLowerCase();
-        if ( hofGolfers[golferName] ) {
-            res.json( hofGolfers[golferName] )
+        const golferName = req.params.name.toLowerCase()
+        if (hofGolfers[golferName]) {
+            res.json(hofGolfers[golferName] )
         } else {
-            res.json( hofGolfers['Unknown'] )
+            res.json(hofGolfers['unknown'])
         }
     })
 
